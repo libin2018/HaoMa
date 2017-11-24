@@ -1,7 +1,7 @@
 # HaoMa
 MobileAddress 手机归属地 
 
-# 01 Linux 下安装Redis
+## 01 Linux 下安装Redis
 
 下载地址：[http://redis.io/download](http://redis.io/download)，下载最新文档版本。
 
@@ -82,7 +82,7 @@ redis 127.0.0.1:6379[1]> config get requirepass
 后台运行Redis
 
 
-# 02 CentOS 下安装 Node.js
+## 02 CentOS 下安装 Node.js
 
 ## 1、下载源码，你需要在https://nodejs.org/en/download/下载最新的Nodejs版本，本文以v0.10.24为例:
 
@@ -162,7 +162,7 @@ npm模块安装路径
 
 注：Nodejs 官网提供了编译好的Linux二进制包，你也可以下载下来直接应用。
 
-# 03 安装PM2
+## 03 安装PM2
 
 GitHub 地址：https://github.com/Unitech/pm2
 
@@ -293,7 +293,7 @@ pm2 monit：监视每个 node 进程的 CPU 和内存的使用情况。
 
 
 
-# 04 启动应用
+## 04 启动应用
 
 启动Redis:
 
@@ -448,7 +448,7 @@ service redisd stop
 4. pm2 startup
 
 
-# 05 源代码
+## 05 源代码
 
 ```
 var express = require('express');
