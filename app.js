@@ -1,18 +1,17 @@
-var express = require('express');
+ï»¿var express = require('express');
 var request = require('request');
 var redis = require('redis');
 var app = express();
 
 app.get('/:id', function (req, res) {
-    // redis Á´½Ó
+    // redis é“¾æ¥
     var client = redis.createClient('6379', '127.0.0.1');
-    // redis Á´½Ó´íÎó
+    // redis é“¾æ¥é”™è¯¯
     client.on("error", function (error) {
         console.log(error);
     });
-    // redis ÑéÖ¤ (reids.confÎ´¿ªÆôÑéÖ¤£¬´ËÏî¿É²»ĞèÒª)
-    client.auth("MetenCRM2017");
-    //client.auth("foobared");
+    // redis éªŒè¯ (reids.confæœªå¼€å¯éªŒè¯ï¼Œæ­¤é¡¹å¯ä¸éœ€è¦)
+    client.auth("foobared");
 
     if (req.params.id == "favicon.ico") { return; }
 
@@ -34,7 +33,7 @@ app.get('/:id', function (req, res) {
                             address = address + "";
                             address = address.replace(/(\d){11}/g, mobile);
 
-                            console.log("²éÑ¯Redis ¹éÊôµØ:" + address);
+                            console.log("æŸ¥è¯¢Redis å½’å±åœ°:" + address);
 
                             res.writeHead(200, { 'Content-Type': 'text/html;charset=utf-8' });
                             //res.end(JSON.stringify(address));
@@ -42,10 +41,10 @@ app.get('/:id', function (req, res) {
                             client.end(true);
                         }
                         else {
-                            // µ÷ÓÃAPI²éÑ¯
+                            // ÂµÃ·Ã“ÃƒAPIÂ²Ã©Ã‘Â¯
                             request("http://v.showji.com/Locating/showji.com2016234999234.aspx?m=" + mobile + "&output=json", function (error, response, body) {
                                 if (!error && response.statusCode == 200) {
-                                    console.log("²éÑ¯API ¹éÊôµØ:" + body);
+                                    console.log("æŸ¥è¯¢API å½’å±åœ°:" + body);
                                     address = body;
                                     client.hmset("MobileAddress", mobile.substring(0, 7), address, function (error, result) {
                                         if (error) {
@@ -70,6 +69,6 @@ app.get('/:id', function (req, res) {
 var server = app.listen(8083, function () {
     var host = server.address().address;
     var port = server.address().port;
-    console.log("Ó¦ÓÃÊµÀı£¬·ÃÎÊµØÖ·Îª http://%s:%s", host, port);
-    //console.log("Ó¦ÓÃÊµÀı£ºhttp://localhost:8083/13926585591");
+    console.log("åº”ç”¨å®ä¾‹ï¼Œè®¿é—®åœ°å€ä¸º http://%s:%s", host, port);
+    //console.log("åº”ç”¨å®ä¾‹ï¼šhttp://localhost:8083/13800001234");
 });
